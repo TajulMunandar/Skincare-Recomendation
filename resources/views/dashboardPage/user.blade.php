@@ -42,7 +42,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Name</th>
-                                    <th>NIM</th>
                                     <th>Username</th>
                                     <th>Role</th>
                                     <th>Action</th>
@@ -53,7 +52,6 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $user->name }}</td>
-                                        <td>{{ $user->nim }}</td>
                                         <td>{{ $user->username }}</td>
                                         <td>
                                             @if ($user->isAdmin == 1)
@@ -134,18 +132,6 @@
                                                                     value="{{ old('name', $user->name) }}" autofocus
                                                                     required>
                                                                 @error('name')
-                                                                    <div class="invalid-feedback">
-                                                                        {{ $message }}
-                                                                    </div>
-                                                                @enderror
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="nim" class="form-label">NIM</label>
-                                                                <input type="text" class="form-control @error('nim') is-invalid @enderror"
-                                                                    name="nim" id="nim"
-                                                                    value="{{ old('nim', $user->nim) }}"
-                                                                    placeholder="anton" autofocus required>
-                                                                @error('nim')
                                                                     <div class="invalid-feedback">
                                                                         {{ $message }}
                                                                     </div>
@@ -273,16 +259,6 @@
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
                                         name="name" id="name" placeholder="Anton" autofocus required>
                                     @error('name')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nim" class="form-label">NIM</label>
-                                    <input type="text" class="form-control @error('nim') is-invalid @enderror"
-                                        name="nim" id="nim" placeholder="anton" autofocus required>
-                                    @error('nim')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

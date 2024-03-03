@@ -43,6 +43,42 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ Request::is('dashboard/brand') ? 'active' : '' }}" href="/dashboard/brand">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-buildings {{ Request::is('dashboard/brand') ? '' : 'text-dark' }} fs-6 "></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Brand</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('dashboard/tipe-kulit') ? 'active' : '' }}" href="/dashboard/tipe-kulit">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-face-sunglasses {{ Request::is('dashboard/tipe-kulit') ? '' : 'text-dark' }} fs-6 "></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Tipe Kulit</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('dashboard/masalah-kulit') ? 'active' : '' }}" href="/dashboard/masalah-kulit">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-hand-dots {{ Request::is('dashboard/masalah-kulit') ? '' : 'text-dark' }} fs-6 "></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Masalah Kulit</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('dashboard/kategori') ? 'active' : '' }}" href="/dashboard/kategori">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-list {{ Request::is('dashboard/kategori') ? '' : 'text-dark' }} fs-6 "></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Kategori</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ Request::is('dashboard/user') ? 'active' : '' }}" href="/dashboard/user">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">

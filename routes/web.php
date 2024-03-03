@@ -1,8 +1,14 @@
 <?php
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\MasalahKulitController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RekomendasiController;
+use App\Http\Controllers\TipeKulitController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +30,12 @@ Route::get('/', function () {
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/user', userController::class);
+    Route::resource('/tipe-kulit', TipeKulitController::class);
+    Route::resource('/brand', BrandController::class);
+    Route::resource('/masalah-kulit', MasalahKulitController::class);
+    Route::resource('/kategori', KategoriController::class);
+    Route::resource('/product', ProductController::class);
+    Route::resource('/rekomendasi', RekomendasiController::class);
     Route::post('/user/reset-password', [userController::class, 'resetPasswordAdmin'])->name('user.password');
 });
 
