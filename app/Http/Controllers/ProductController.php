@@ -8,6 +8,7 @@ use App\Models\MasalahKulit;
 use App\Models\Product;
 use App\Models\TypeKulit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -53,7 +54,12 @@ class ProductController extends Controller
                 'id_type_kulit' => 'required',
                 'id_masalah_kulit' => 'required',
                 'id_kategori' => 'required',
+                'gambar' => 'required|image|mimes:jpeg,jpg,png'
             ]);
+
+            if ($request->file('gambar')) {
+                $validatedData['gambar'] = $request->file('gambar')->store('gambar-product');
+            }
 
             Product::create($validatedData);
 
@@ -93,9 +99,17 @@ class ProductController extends Controller
                 'id_type_kulit' => 'required',
                 'id_masalah_kulit' => 'required',
                 'id_kategori' => 'required',
+                'gambar' => 'required|image|mimes:jpeg,jpg,png'
             ];
 
             $validatedData = $this->validate($request, $rules);
+
+            if ($request->file('gambar')) {
+                if ($request->oldGambar) {
+                    Storage::delete($request->oldGambar);
+                }
+                $validatedData['gambar'] = $request->file('gambar')->store('gambar-product');
+            }
 
             Product::where('id', $product->id)->update($validatedData);
 
@@ -111,6 +125,9 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         try {
+            if ($product->gambar) {
+                Storage::delete($product->gambar);
+            }
             Product::destroy($product->id);
         } catch (\Illuminate\Database\QueryException $e) {
             if ($e->getCode() == 23000) {

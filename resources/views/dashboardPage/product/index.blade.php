@@ -6,14 +6,14 @@
         <div class="row mt-3">
             <div class="col">
                 @if (session()->has('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show text-white" role="alert">
                         {{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
                 @if (session()->has('failed'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show text-white" role="alert">
                         {{ session('failed') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
@@ -48,6 +48,7 @@
                                     <th>Tipe Kulit</th>
                                     <th>Masalah Kulit</th>
                                     <th>Kategori</th>
+                                    <th>Gambar</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -62,6 +63,11 @@
                                         <td>{{ $product->TypeKulit->nama }}</td>
                                         <td>{{ $product->MasalahKulit->nama }}</td>
                                         <td>{{ $product->Kategori->nama }}</td>
+                                        <td>
+                                            <img class="rounded-3" style="object-fit: cover"
+                                            src="{{ asset('storage/' . $product->gambar) }}"
+                                            alt="" height="75" width="175">
+                                        </td>
                                         <td>
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                                 data-bs-target="#editModal{{ $loop->iteration }}">
@@ -122,6 +128,7 @@
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="row">
+                                                            <input type="hidden" name="oldGambar" value="{{ $product->gambar }}">
                                                             <div class="mb-3">
                                                                 <label for="nama" class="form-label">Nama</label>
                                                                 <input type="text"
@@ -163,7 +170,8 @@
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="id_brand" class="form-label">Brand</label>
-                                                                <select class="form-select @error('id_brand') is-invalid @enderror"
+                                                                <select
+                                                                    class="form-select @error('id_brand') is-invalid @enderror"
                                                                     name="id_brand" id="id_brand"
                                                                     value="{{ old('id_brand', $product->id_brand) }}">
                                                                     @foreach ($brands as $brand)
@@ -178,13 +186,16 @@
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="id_type_kulit" class="form-label">Tipe Kulit</label>
-                                                                <select class="form-select @error('id_type_kulit') is-invalid @enderror"
+                                                                <label for="id_type_kulit" class="form-label">Tipe
+                                                                    Kulit</label>
+                                                                <select
+                                                                    class="form-select @error('id_type_kulit') is-invalid @enderror"
                                                                     name="id_type_kulit" id="id_type_kulit"
                                                                     value="{{ old('id_type_kulit', $product->id_type_kulit) }}">
                                                                     @foreach ($type_kulits as $type_kulit)
                                                                         @if (old('id_type_kulit', $product->id_type_kulit) == $type_kulit->id)
-                                                                            <option value="{{ $type_kulit->id }}" selected>
+                                                                            <option value="{{ $type_kulit->id }}"
+                                                                                selected>
                                                                                 {{ $type_kulit->nama }}</option>
                                                                         @else
                                                                             <option value="{{ $type_kulit->id }}">
@@ -194,13 +205,16 @@
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="id_masalah_kulit" class="form-label">Masalah Kulit</label>
-                                                                <select class="form-select @error('id_masalah_kulit') is-invalid @enderror"
+                                                                <label for="id_masalah_kulit" class="form-label">Masalah
+                                                                    Kulit</label>
+                                                                <select
+                                                                    class="form-select @error('id_masalah_kulit') is-invalid @enderror"
                                                                     name="id_masalah_kulit" id="id_masalah_kulit"
                                                                     value="{{ old('id_masalah_kulit', $product->id_masalah_kulit) }}">
                                                                     @foreach ($masalah_kulits as $masalah_kulit)
                                                                         @if (old('id_masalah_kulit', $product->id_masalah_kulit) == $masalah_kulit->id)
-                                                                            <option value="{{ $masalah_kulit->id }}" selected>
+                                                                            <option value="{{ $masalah_kulit->id }}"
+                                                                                selected>
                                                                                 {{ $masalah_kulit->nama }}</option>
                                                                         @else
                                                                             <option value="{{ $masalah_kulit->id }}">
@@ -210,8 +224,10 @@
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="id_kategori" class="form-label">Kategori</label>
-                                                                <select class="form-select @error('id_kategori') is-invalid @enderror"
+                                                                <label for="id_kategori"
+                                                                    class="form-label">Kategori</label>
+                                                                <select
+                                                                    class="form-select @error('id_kategori') is-invalid @enderror"
                                                                     name="id_kategori" id="id_kategori"
                                                                     value="{{ old('id_kategori', $product->id_kategori) }}">
                                                                     @foreach ($kategoris as $kategori)
@@ -225,6 +241,22 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
+                                                            <div class="mb-3">
+                                                                <label for="gambar" class="form-label">Upload
+                                                                    Gambar Product</label>
+                                                                <img src="{{ asset('storage/' . $product->gambar) }}"
+                                                                    class="img-previewnew1 img-fluid mb-3 col-sm-5 d-block">
+                                                                <img class="img-previewnew1 img-fluid mb-3 col-sm-5">
+                                                                <input
+                                                                    class="form-control @error('gambar') is-invalid @enderror"
+                                                                    type="file" name="gambar" id="thumnailnew1"
+                                                                    onchange="previewImagenew1()">
+                                                                @error('gambar')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -237,7 +269,6 @@
                                         </div>
                                     </div>
                                     {{-- Modal Edit --}}
-
                                 @endforeach
                             </tbody>
                         </table>
@@ -259,6 +290,7 @@
                         @csrf
                         <div class="modal-body">
                             <div class="row">
+
                                 <div class="mb-3">
                                     <label for="nama" class="form-label">Nama</label>
                                     <input type="text" class="form-control @error('nama') is-invalid @enderror"
@@ -301,8 +333,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="id_type_kulit" class="form-label">Tipe Kulit</label>
-                                    <select class="form-select @error('id_type_kulit') is-invalid @enderror" name="id_type_kulit"
-                                        id="id_type_kulit">
+                                    <select class="form-select @error('id_type_kulit') is-invalid @enderror"
+                                        name="id_type_kulit" id="id_type_kulit">
                                         @foreach ($type_kulits as $type_kulit)
                                             <option value="{{ $type_kulit->id }}" selected>
                                                 {{ $type_kulit->nama }}</option>
@@ -311,8 +343,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="id_masalah_kulit" class="form-label">Masalah Kulit</label>
-                                    <select class="form-select @error('id_masalah_kulit') is-invalid @enderror" name="id_masalah_kulit"
-                                        id="id_masalah_kulit">
+                                    <select class="form-select @error('id_masalah_kulit') is-invalid @enderror"
+                                        name="id_masalah_kulit" id="id_masalah_kulit">
                                         @foreach ($masalah_kulits as $masalah_kulit)
                                             <option value="{{ $masalah_kulit->id }}" selected>
                                                 {{ $masalah_kulit->nama }}</option>
@@ -321,13 +353,24 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="id_kategori" class="form-label">Kategori</label>
-                                    <select class="form-select @error('id_kategori') is-invalid @enderror" name="id_kategori"
-                                        id="id_kategori">
+                                    <select class="form-select @error('id_kategori') is-invalid @enderror"
+                                        name="id_kategori" id="id_kategori">
                                         @foreach ($kategoris as $kategori)
                                             <option value="{{ $kategori->id }}" selected>
                                                 {{ $kategori->nama }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="gambar" class="form-label">Upload Gambar <i>(png, jpeg, jpg)</i></label>
+                                    <img class="img-preview img-fluid mb-3 col-sm-5">
+                                    <input class="form-control @error('gambar') is-invalid @enderror" type="file"
+                                        name="gambar" id="gambar" onchange="previewImage()">
+                                    @error('gambar')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -345,6 +388,35 @@
 
 @section('scripts')
     <script>
+        function previewImage() {
+            const image = document.querySelector('#gambar');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(OFREvent) {
+                imgPreview.src = OFREvent.target.result;
+            }
+        }
+
+        function previewImagenew1() {
+
+            const image1 = document.querySelector('#thumnailnew1');
+            const imgPreview1 = document.querySelector('.img-previewnew1');
+
+            imgPreview1.style.display = 'block';
+
+            const oFReader1 = new FileReader();
+            oFReader1.readAsDataURL(image1.files[0]);
+
+            oFReader1.onload = function(OFREvent) {
+                imgPreview1.src = OFREvent.target.result;
+            }
+        }
+
         $(document).ready(function() {
             // Simpan ikon di dalam tag HTML
             var prevIcon = '<i class="fa-solid fa-chevron-left"></i>';

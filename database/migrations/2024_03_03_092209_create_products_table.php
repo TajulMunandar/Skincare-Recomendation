@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('id_type_kulit')->constrained('type_kulits')->onDelete('restrict')->onUpdate('cascade');
             $table->foreignId('id_masalah_kulit')->constrained('masalah_kulits')->onDelete('restrict')->onUpdate('cascade');
             $table->foreignId('id_kategori')->constrained('kategoris')->onDelete('restrict')->onUpdate('cascade');
+            $table->text('gambar');
             $table->timestamps();
         });
     }

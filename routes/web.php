@@ -45,4 +45,11 @@ Route::controller(authController::class)->group(function () {
     Route::post('/logout', 'logout');
 });
 
+Route::middleware('web')->group(function () {
+    // Rute lainnya di sini
+    Route::post('/rekomendasi/cbf', [RekomendasiController::class, 'saveRecommendations'])->name('rekomendasi.cbf');
+});
+
+Route::get('/rekomendasi/getData', [RekomendasiController::class, 'getData'])->name('rekomendasi.getData');
+
 Route::resource('/register', RegisterController::class)->middleware('guest');
