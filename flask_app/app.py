@@ -21,11 +21,28 @@ def get_data():
         response.raise_for_status()  # Membuat exception jika response status code bukan 200
         skincare_data = pd.DataFrame(response.json())
 
-        skincare_data['Features'] = skincare_data['Id'].astype(str) + ' ' + skincare_data['Brand'] + ' ' + skincare_data['Masalah_Kulit'] + ' ' + \
-                                skincare_data['Tipe_Kulit'] + ' ' + skincare_data['Kategori'] + ' ' + \
-                                skincare_data['Umur'] + ' ' +  skincare_data['Harga'].astype(str)
+        # bobot
+        brand_weight = 2.0
+        skin_issue_weight = 1.5
+        skin_type_weight = 1.0
+        category_weight = 1.0
+        age_weight = 1.5
+        price_weight = 2.0
 
-        tfidf_vectorizer = TfidfVectorizer()
+        skincare_data['Features'] = (skincare_data['Id'].astype(str) + ' ' +
+                                     (skincare_data['Brand'] + ' ') * brand_weight +
+                                     (skincare_data['Masalah_Kulit'] + ' ') * skin_issue_weight +
+                                     (skincare_data['Tipe_Kulit'] + ' ') * skin_type_weight +
+                                     (skincare_data['Kategori'] + ' ') * category_weight +
+                                     (skincare_data['Umur'].astype(str) + ' ') * age_weight +
+                                     (skincare_data['Harga'].astype(str) + ' ') * price_weight)
+
+        tfidf_vectorizer = TfidfVectorizer(
+            tokenizer=lambda text: text.split(),  # Gunakan tokenizer yang membagi teks berdasarkan spasi
+            ngram_range=(1, 2),  # Gunakan unigram dan bigram
+            max_df=0.95,  # Hapus kata-kata yang muncul dalam lebih dari 80% dokumen
+            min_df=1
+        )
         tfidf_matrix = tfidf_vectorizer.fit_transform(skincare_data['Features'])
 
         return skincare_data, tfidf_vectorizer, tfidf_matrix
@@ -70,6 +87,14 @@ def cbf_recommendation():
 
             # Merekomendasikan produk skincare berdasarkan input pengguna
             recommended_products = recommend_skincare(user_input, skincare_data, tfidf_vectorizer, tfidf_matrix)
+
+            print("Bobot TF-IDF untuk setiap fitur:")
+            feature_names = tfidf_vectorizer.get_feature_names_out()
+            idf_values = tfidf_vectorizer.idf_
+
+            for feature, idf in zip(feature_names, idf_values):
+                print(f"{feature}: {idf}")
+
             return jsonify(status="success", message="Rekomendasi berhasil ditemukan", data=recommended_products.to_dict()), 200
         else:
             return jsonify(error="Gagal mendapatkan data dari API Laravel"), 500

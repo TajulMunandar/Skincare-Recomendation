@@ -99,7 +99,6 @@ class ProductController extends Controller
                 'id_type_kulit' => 'required',
                 'id_masalah_kulit' => 'required',
                 'id_kategori' => 'required',
-                'gambar' => 'required|image|mimes:jpeg,jpg,png'
             ];
 
             $validatedData = $this->validate($request, $rules);
