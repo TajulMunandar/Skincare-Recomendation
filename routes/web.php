@@ -27,12 +27,18 @@ Route::get('/', function () {
     return redirect('/dashboard');
 });
 
+
+
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/user', userController::class);
     Route::resource('/tipe-kulit', TipeKulitController::class);
     Route::resource('/brand', BrandController::class);
     Route::resource('/masalah-kulit', MasalahKulitController::class);
+    Route::get('/tipe-kulit-rekom', function () {
+        $page = "Tipe Kulit Rekom";
+        return view('dashboardPage.tipe-kulit-rekom.index')->with(compact('page'));
+    });
     Route::resource('/kategori', KategoriController::class);
     Route::resource('/product', ProductController::class);
     Route::resource('/rekomendasi', RekomendasiController::class);
