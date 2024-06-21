@@ -15,6 +15,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $userFactory = new UserFactory(); // Buat instance dari UserFactory
+        $this->call([
+            BrandSeeder::class,
+            TypeKulitSeeder::class,
+            MasalahKulitSeeder::class,
+            KategoriSeeder::class,
+            ProductSeeder::class,
+        ]);
         $userFactory->create();
     }
 }

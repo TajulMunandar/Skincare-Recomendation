@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('umur');
-            $table->float('harga');
+            $table->double('harga');
             $table->foreignId('id_brand')->constrained('brands')->onDelete('restrict')->onUpdate('cascade');
             $table->foreignId('id_type_kulit')->constrained('type_kulits')->onDelete('restrict')->onUpdate('cascade');
             $table->foreignId('id_masalah_kulit')->constrained('masalah_kulits')->onDelete('restrict')->onUpdate('cascade');

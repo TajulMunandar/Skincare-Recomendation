@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RekomendasiController;
 use App\Http\Controllers\TipeKulitController;
+use App\Http\Controllers\TipeKulitRekomController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,10 +36,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::resource('/tipe-kulit', TipeKulitController::class);
     Route::resource('/brand', BrandController::class);
     Route::resource('/masalah-kulit', MasalahKulitController::class);
-    Route::get('/tipe-kulit-rekom', function () {
-        $page = "Tipe Kulit Rekom";
-        return view('dashboardPage.tipe-kulit-rekom.index')->with(compact('page'));
-    });
+    Route::resource('/tipe-kulit-rekom', TipeKulitRekomController::class);
     Route::resource('/kategori', KategoriController::class);
     Route::resource('/product', ProductController::class);
     Route::resource('/rekomendasi', RekomendasiController::class);
