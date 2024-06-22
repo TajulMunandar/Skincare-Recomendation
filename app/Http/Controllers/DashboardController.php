@@ -1,10 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Brand;
+use App\Models\Kategori;
+use App\Models\TypeKulit;
 use Illuminate\Support\Facades\File;
 use App\Models\Category;
 use App\Models\feedback;
 use App\Models\Mahasiswa;
+use App\Models\MasalahKulit;
+use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -15,8 +21,18 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $product = Product::count();
+        $brand = Brand::count();
+        $tipe_kulit = TypeKulit::count();
+        $kategori = Kategori::count();
+        $masalah = MasalahKulit::count();
         return view('dashboardPage.index', [
-            'page' => 'Dashboard'
+            'page' => 'Dashboard',
+            'produk' => $product,
+            'brand' => $brand,
+            'tipe' => $tipe_kulit,
+            'kategori' => $kategori,
+            'masalah' => $masalah,
         ]);
     }
 
