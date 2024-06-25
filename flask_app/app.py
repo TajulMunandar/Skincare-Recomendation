@@ -85,7 +85,7 @@ def cbf_recommendation():
 
         if skincare_data is not None:
             # Gabungkan input pengguna menjadi satu string
-            user_input = f"{umur} {harga} {id_brand} {id_type_kulit} {id_masalah_kulit} {id_kategori}"
+            user_input = f"{id_brand} {id_type_kulit} {id_masalah_kulit} {harga} {id_kategori} {umur}"
 
             # Merekomendasikan produk skincare berdasarkan input pengguna
             recommended_products = recommend_skincare(

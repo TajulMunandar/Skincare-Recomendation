@@ -64,9 +64,8 @@
                                         <td>{{ $product->MasalahKulit->nama }}</td>
                                         <td>{{ $product->Kategori->nama }}</td>
                                         <td>
-                                            <img class="rounded-3" style="object-fit: cover"
-                                            src="{{ asset('storage/' . $product->gambar) }}"
-                                            alt="" height="75" width="175">
+                                            <img class="rounded-3" style="object-fit: cover" src="{{ $product->gambar }}"
+                                                alt="" height="75" width="175">
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal"
@@ -128,7 +127,8 @@
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="row">
-                                                            <input type="hidden" name="oldGambar" value="{{ $product->gambar }}">
+                                                            <input type="hidden" name="oldGambar"
+                                                                value="{{ $product->gambar }}">
                                                             <div class="mb-3">
                                                                 <label for="nama" class="form-label">Nama</label>
                                                                 <input type="text"

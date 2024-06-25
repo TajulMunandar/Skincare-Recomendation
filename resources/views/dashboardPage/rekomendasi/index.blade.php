@@ -69,7 +69,7 @@
                                     <select class="form-select @error('id_brand') is-invalid @enderror" name="id_brand"
                                         id="id_brand">
                                         @foreach ($brands as $brand)
-                                            <option value="{{ $brand->id }}" selected>
+                                            <option value="{{ $brand->nama }}" selected>
                                                 {{ $brand->nama }}</option>
                                         @endforeach
                                     </select>
@@ -79,7 +79,7 @@
                                     <select class="form-select @error('id_type_kulit') is-invalid @enderror"
                                         name="id_type_kulit" id="id_type_kulit">
                                         @foreach ($type_kulits as $type_kulit)
-                                            <option value="{{ $type_kulit->id }}" selected>
+                                            <option value="{{ $type_kulit->nama }}" selected>
                                                 {{ $type_kulit->nama }}</option>
                                         @endforeach
                                     </select>
@@ -89,7 +89,7 @@
                                     <select class="form-select @error('id_masalah_kulit') is-invalid @enderror"
                                         name="id_masalah_kulit" id="id_masalah_kulit">
                                         @foreach ($masalah_kulits as $masalah_kulit)
-                                            <option value="{{ $masalah_kulit->id }}" selected>
+                                            <option value="{{ $masalah_kulit->nama }}" selected>
                                                 {{ $masalah_kulit->nama }}</option>
                                         @endforeach
                                     </select>
@@ -99,7 +99,7 @@
                                     <select class="form-select @error('id_kategori') is-invalid @enderror"
                                         name="id_kategori" id="id_kategori">
                                         @foreach ($kategoris as $kategori)
-                                            <option value="{{ $kategori->id }}" selected>
+                                            <option value="{{ $kategori->nama }}" selected>
                                                 {{ $kategori->nama }}</option>
                                         @endforeach
                                     </select>
@@ -128,20 +128,18 @@
             event.preventDefault();
 
             const formData = new FormData(form);
-
             const response = await fetch(url, {
                 method: 'POST',
                 body: formData
             });
 
             const data = await response.json();
-            console.log(data)
 
             if (data.status === 'success') {
                 const productData = data.data;
                 let cardHtml = '';
                 for (const [key, value] of Object.entries(productData.Nama)) {
-                    const imageUrl = `{{ asset('/storage/') }}/${productData.gambar[key]}`;
+                    const imageUrl = `${productData.gambar[key]}`;
 
                     // Membuat HTML untuk setiap kartu produk
                     cardHtml += `
