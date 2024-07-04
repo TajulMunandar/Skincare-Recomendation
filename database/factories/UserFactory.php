@@ -18,14 +18,14 @@ class UserFactory extends Factory
      * @return array<string, mixed>
      */
 
-     protected $model = User::class;
+    protected $model = User::class;
     public function definition(): array
     {
         return [
             'username' => 'admin',
             'password' => Hash::make('admin'), // Menggunakan Hash::make() untuk mengenkripsi password
             'name' => $this->faker->name(), // Menggunakan $this->faker->name() untuk generate nama secara random
-            'isAdmin' => 0,
+            'isAdmin' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ];

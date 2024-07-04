@@ -46,7 +46,7 @@
                                     <th>Harga</th>
                                     <th>Brand</th>
                                     <th>Tipe Kulit</th>
-                                    <th>Masalah Kulit</th>
+                                    <th>Ingridients</th>
                                     <th>Kategori</th>
                                     <th>Gambar</th>
                                     <th>Action</th>
@@ -61,7 +61,7 @@
                                         <td>{{ $product->harga }}</td>
                                         <td>{{ $product->Brand->nama }}</td>
                                         <td>{{ $product->TypeKulit->nama }}</td>
-                                        <td>{{ $product->MasalahKulit->nama }}</td>
+                                        <td>{{ $product->ingridient }}</td>
                                         <td>{{ $product->Kategori->nama }}</td>
                                         <td>
                                             <img class="rounded-3" style="object-fit: cover" src="{{ $product->gambar }}"
@@ -205,24 +205,17 @@
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="id_masalah_kulit" class="form-label">Masalah
-                                                                    Kulit</label>
-                                                                <select
-                                                                    class="form-select @error('id_masalah_kulit') is-invalid @enderror"
-                                                                    name="id_masalah_kulit" id="id_masalah_kulit"
-                                                                    value="{{ old('id_masalah_kulit', $product->id_masalah_kulit) }}">
-                                                                    @foreach ($masalah_kulits as $masalah_kulit)
-                                                                        @if (old('id_masalah_kulit', $product->id_masalah_kulit) == $masalah_kulit->id)
-                                                                            <option value="{{ $masalah_kulit->id }}"
-                                                                                selected>
-                                                                                {{ $masalah_kulit->nama }}</option>
-                                                                        @else
-                                                                            <option value="{{ $masalah_kulit->id }}">
-                                                                                {{ $masalah_kulit->nama }}</option>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </select>
+                                                                <label for="ingridient"
+                                                                    class="form-label">Ingridient</label>
+                                                                <textarea class="form-control @error('ingridient') is-invalid @enderror" name="ingridient" id="ingridient"
+                                                                    placeholder="Masukkan daftar ingridient di sini" required>{{ old('ingridient', $product->ingridient) }}</textarea>
+                                                                @error('ingridient')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
+
                                                             <div class="mb-3">
                                                                 <label for="id_kategori"
                                                                     class="form-label">Kategori</label>
@@ -342,14 +335,14 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="id_masalah_kulit" class="form-label">Masalah Kulit</label>
-                                    <select class="form-select @error('id_masalah_kulit') is-invalid @enderror"
-                                        name="id_masalah_kulit" id="id_masalah_kulit">
-                                        @foreach ($masalah_kulits as $masalah_kulit)
-                                            <option value="{{ $masalah_kulit->id }}" selected>
-                                                {{ $masalah_kulit->nama }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="ingridient" class="form-label">Ingridient</label>
+                                    <textarea class="form-control @error('ingridient') is-invalid @enderror" name="ingridient" id="ingridient"
+                                        placeholder="Masukkan daftar ingridient di sini" required></textarea>
+                                    @error('ingridient')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="id_kategori" class="form-label">Kategori</label>

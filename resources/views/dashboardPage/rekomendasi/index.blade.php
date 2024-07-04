@@ -152,7 +152,7 @@
                                     <li class="list-group-item">Umur: ${productData.Umur[key]}</li>
                                     <li class="list-group-item">Harga: Rp. ${productData.Harga[key]}</li>
                                     <li class="list-group-item">Brand: ${productData.Brand[key]}</li>
-                                    <li class="list-group-item">Masalah Kulit: ${productData.Masalah_Kulit[key]}</li>
+                                    <li class="list-group-item">Ingridient: ${productData.ingridient[key]}</li>
                                     <li class="list-group-item">Tipe Kulit: ${productData.Tipe_Kulit[key]}</li>
                                     <li class="list-group-item">Kategori: ${productData.Kategori[key]}</li>
                                 </ul>

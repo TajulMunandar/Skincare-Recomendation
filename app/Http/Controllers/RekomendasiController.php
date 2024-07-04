@@ -85,7 +85,6 @@ class RekomendasiController extends Controller
                 'Id' => $product->id,
                 'Nama' => $product->nama,
                 'Brand' => $product->Brand->nama, // Asumsikan ada relasi dengan tabel brands
-                'Masalah_Kulit' => $product->MasalahKulit->nama, // Asumsikan ada relasi dengan tabel masalah_kulits
                 'Tipe_Kulit' => $product->TypeKulit->nama, // Asumsikan ada relasi dengan tabel type_kulits
                 'Kategori' => $product->Kategori->nama, // Asumsikan ada relasi dengan tabel kategoris
                 'Harga' => $product->harga,

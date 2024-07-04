@@ -42,6 +42,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Masalah Kulit</th>
+                                    <th>Ingridient</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -50,6 +51,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $masalah_kulit->nama }}</td>
+                                        <td>{{ $masalah_kulit->ingridient }}</td>
                                         <td>
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                                 data-bs-target="#editModal{{ $loop->iteration }}">
@@ -68,12 +70,13 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Hapus Data Masalah Kulit</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Hapus Data Masalah Kulit
+                                                    </h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <form action="{{ route('masalah-kulit.destroy', $masalah_kulit->id) }}" method="post"
-                                                    enctype="multipart/form-data">
+                                                <form action="{{ route('masalah-kulit.destroy', $masalah_kulit->id) }}"
+                                                    method="post" enctype="multipart/form-data">
                                                     @method('delete')
                                                     @csrf
                                                     <div class="modal-body">
@@ -100,12 +103,13 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Masalah Kulit</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Masalah Kulit
+                                                    </h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <form action="{{ route('masalah-kulit.update', $masalah_kulit->id) }}" method="POST"
-                                                    enctype="multipart/form-data">
+                                                <form action="{{ route('masalah-kulit.update', $masalah_kulit->id) }}"
+                                                    method="POST" enctype="multipart/form-data">
                                                     @method('put')
                                                     @csrf
                                                     <div class="modal-body">
@@ -115,14 +119,26 @@
                                                                 <input type="text"
                                                                     class="form-control @error('nama') is-invalid @enderror"
                                                                     name="nama" id="nama" placeholder="Anton"
-                                                                    value="{{ old('nama', $masalah_kulit->nama) }}" autofocus
-                                                                    required>
+                                                                    value="{{ old('nama', $masalah_kulit->nama) }}"
+                                                                    autofocus required>
                                                                 @error('nama')
                                                                     <div class="invalid-feedback">
                                                                         {{ $message }}
                                                                     </div>
                                                                 @enderror
                                                             </div>
+                                                            <div class="mb-3">
+                                                                <label for="ingridient"
+                                                                    class="form-label">Ingridient</label>
+                                                                <textarea class="form-control @error('ingridient') is-invalid @enderror" name="ingridient" id="ingridient"
+                                                                    placeholder="Masukkan daftar ingridient di sini" required>{{ old('ingridient', $masalah_kulit->ingridient) }}</textarea>
+                                                                @error('ingridient')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -135,7 +151,6 @@
                                         </div>
                                     </div>
                                     {{-- Modal Edit --}}
-
                                 @endforeach
                             </tbody>
                         </table>
@@ -162,6 +177,16 @@
                                     <input type="text" class="form-control @error('nama') is-invalid @enderror"
                                         name="nama" id="nama" placeholder="Anton" autofocus required>
                                     @error('nama')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ingridient" class="form-label">Ingridient</label>
+                                    <textarea class="form-control @error('ingridient') is-invalid @enderror" name="ingridient" id="ingridient"
+                                        placeholder="Masukkan daftar ingridient di sini" required></textarea>
+                                    @error('ingridient')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

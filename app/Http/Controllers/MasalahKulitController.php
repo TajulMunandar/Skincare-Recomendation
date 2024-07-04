@@ -35,6 +35,7 @@ class MasalahKulitController extends Controller
         try {
             $validatedData = $request->validate([
                 'nama' => 'required',
+                'ingridient' => 'required',
             ]);
 
             MasalahKulit::create($validatedData);
@@ -69,6 +70,7 @@ class MasalahKulitController extends Controller
         try {
             $rules = [
                 'nama' => 'required|max:255',
+                'ingridient' => 'required',
             ];
 
             $validatedData = $this->validate($request, $rules);

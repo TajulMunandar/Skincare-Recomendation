@@ -52,8 +52,8 @@ class ProductController extends Controller
                 'harga' => 'required',
                 'id_brand' => 'required',
                 'id_type_kulit' => 'required',
-                'id_masalah_kulit' => 'required',
                 'id_kategori' => 'required',
+                'ingridient' => 'required',
                 'gambar' => 'required|image|mimes:jpeg,jpg,png'
             ]);
 
@@ -97,7 +97,7 @@ class ProductController extends Controller
                 'harga' => 'required',
                 'id_brand' => 'required',
                 'id_type_kulit' => 'required',
-                'id_masalah_kulit' => 'required',
+                'ingridient' => 'required',
                 'id_kategori' => 'required',
             ];
 
