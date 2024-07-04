@@ -54,12 +54,12 @@ class ProductController extends Controller
                 'id_type_kulit' => 'required',
                 'id_kategori' => 'required',
                 'ingridient' => 'required',
-                'gambar' => 'required|image|mimes:jpeg,jpg,png'
+                'gambar' => 'required'
             ]);
 
-            if ($request->file('gambar')) {
-                $validatedData['gambar'] = $request->file('gambar')->store('gambar-product');
-            }
+            // if ($request->file('gambar')) {
+            //     $validatedData['gambar'] = $request->file('gambar')->store('gambar-product');
+            // }
 
             Product::create($validatedData);
 
@@ -99,16 +99,17 @@ class ProductController extends Controller
                 'id_type_kulit' => 'required',
                 'ingridient' => 'required',
                 'id_kategori' => 'required',
+                'gambar' => 'required',
             ];
 
             $validatedData = $this->validate($request, $rules);
 
-            if ($request->file('gambar')) {
-                if ($request->oldGambar) {
-                    Storage::delete($request->oldGambar);
-                }
-                $validatedData['gambar'] = $request->file('gambar')->store('gambar-product');
-            }
+            // if ($request->file('gambar')) {
+            //     if ($request->oldGambar) {
+            //         Storage::delete($request->oldGambar);
+            //     }
+            //     $validatedData['gambar'] = $request->file('gambar')->store('gambar-product');
+            // }
 
             Product::where('id', $product->id)->update($validatedData);
 

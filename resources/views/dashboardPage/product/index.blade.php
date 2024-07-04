@@ -235,15 +235,12 @@
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="gambar" class="form-label">Upload
-                                                                    Gambar Product</label>
-                                                                <img src="{{ asset('storage/' . $product->gambar) }}"
-                                                                    class="img-previewnew1 img-fluid mb-3 col-sm-5 d-block">
-                                                                <img class="img-previewnew1 img-fluid mb-3 col-sm-5">
-                                                                <input
+                                                                <label for="gambar" class="form-label">Gambar</label>
+                                                                <input type="text"
                                                                     class="form-control @error('gambar') is-invalid @enderror"
-                                                                    type="file" name="gambar" id="thumnailnew1"
-                                                                    onchange="previewImagenew1()">
+                                                                    name="gambar" id="gambar" placeholder="Anton"
+                                                                    value="{{ old('gambar', $product->gambar) }}"
+                                                                    autofocus required>
                                                                 @error('gambar')
                                                                     <div class="invalid-feedback">
                                                                         {{ $message }}
@@ -355,10 +352,10 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="gambar" class="form-label">Upload Gambar <i>(png, jpeg, jpg)</i></label>
-                                    <img class="img-preview img-fluid mb-3 col-sm-5">
-                                    <input class="form-control @error('gambar') is-invalid @enderror" type="file"
-                                        name="gambar" id="gambar" onchange="previewImage()">
+                                    <label for="gambar" class="form-label">Gambar</label>
+                                    <input type="text" class="form-control @error('gambar') is-invalid @enderror"
+                                        name="gambar" id="gambar" placeholder="Anton" value="" autofocus
+                                        required>
                                     @error('gambar')
                                         <div class="invalid-feedback">
                                             {{ $message }}
