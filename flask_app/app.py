@@ -29,7 +29,7 @@ def get_data():
             + " "
             + skincare_data["Brand"]
             + " "
-            + skincare_data["Masalah_Kulit"]
+            + skincare_data["ingridient"]
             + " "
             + skincare_data["Tipe_Kulit"]
             + " "

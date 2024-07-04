@@ -89,7 +89,7 @@
                                     <select class="form-select @error('id_masalah_kulit') is-invalid @enderror"
                                         name="id_masalah_kulit" id="id_masalah_kulit">
                                         @foreach ($masalah_kulits as $masalah_kulit)
-                                            <option value="{{ $masalah_kulit->nama }}" selected>
+                                            <option value="{{ $masalah_kulit->ingridient }}" selected>
                                                 {{ $masalah_kulit->nama }}</option>
                                         @endforeach
                                     </select>

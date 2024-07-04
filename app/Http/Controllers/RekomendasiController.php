@@ -53,6 +53,7 @@ class RekomendasiController extends Controller
                         'Harga' => $product->harga,
                         'Kategori' => $product->Kategori->nama,
                         'Masalah_Kulit' => $product->Masalah_Kulit->nama,
+                        'ingridient' => $product->Masalah_Kulit->ingridient,
                         'Tipe_Kulit' => $product->Tipe_Kulit->nama,
                         'Umur' => $product->umur
                     ];
@@ -89,6 +90,7 @@ class RekomendasiController extends Controller
                 'Kategori' => $product->Kategori->nama, // Asumsikan ada relasi dengan tabel kategoris
                 'Harga' => $product->harga,
                 'Umur' => $product->umur,
+                'ingridient' => $product->ingridient,
                 'gambar' => $product->gambar,
             ];
         }
